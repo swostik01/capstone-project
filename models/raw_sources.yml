@@ -1,0 +1,49 @@
+version: 2
+
+sources:
+  - name: raw_adventure
+    description: Raw tables from Snowflake
+    database: RAW_ADVENTURE
+    schema: RAW
+    tables:
+      - name: customer_lookup
+        description: Raw customer data
+        columns:
+          - name: CustomerKey
+            tests: 
+              - unique
+              - not_null
+
+      - name: sales_data
+        description: Raw sales transactions
+        columns:
+          - name: OrderNumber
+          - name: OrderDate
+            tests:
+              - not_null
+          - name: ProductKey
+            tests:
+              - not_null
+
+      - name: product_lookup
+        description: Raw product catalog
+        columns:
+          - name: ProductKey
+            tests: 
+              - unique
+              - not_null
+
+      - name: territory_lookup
+        description: Raw territory data from Snowflake
+        columns:
+          - name: SalesTerritoryKey
+            tests: 
+              - unique
+              - not_null
+          - name: Continent
+            tests:
+              - accepted_values:
+                  values: ['Africa', 'Asia', 'Europe', 'North America', 'South America', 'Oceania', 'Antarctica', 'Pacific']
+
+      - name: returns_data
+        description: Raw returns data from Snowflake
