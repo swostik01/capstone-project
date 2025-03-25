@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: stg_customer
+    description: Staging model for customer data
+    columns:
+      - name: CustomerKey
+        tests:
+          - unique
+          - not_null
+      - name: EmailAddress
+        tests:
+          - not_null
+      - name: AnnualIncome
+        tests:
+          - not_null
+      - name: BirthDate
+        tests:
+          - not_null
+
+  - name: stg_product
+    description: Staging model for product data
+    columns:
+      - name: ProductKey
+        tests:
+          - unique
+          - not_null
+      - name: ProductSubcategoryKey
+        tests:
+          - not_null
+      - name: ProductCost
+      - name: ProductPrice
+
+  - name: stg_returns
+    description: Staging model for return data
+    columns:
+      - name: ProductKey
+        tests:
+          - not_null
+      - name: TerritoryKey
+        tests:
+          - not_null
+      - name: ReturnQuantity
+        tests:
+          - not_null
+
+  - name: stg_sales
+    description: Staging model for sales data
+    columns:
+      - name: OrderDate
+        tests:
+          - not_null
+      - name: OrderNumber
+        tests:
+          - not_null
+      - name: ProductKey
+        tests:
+          - not_null
+      - name: CustomerKey
+        tests:
+          - not_null
+      - name: OrderQuantity
+
+  - name: stg_territory
+    description: Staging model for territory data
+    columns:
+      - name: SalesTerritoryKey
+        tests:
+          - unique
+          - not_null
+      - name: Continent
+        tests:
+          - not_null
+          - accepted_values:
+              values: ["Africa", "Asia", "Europe", "North America", "South America", "Oceania", "Antarctica", "Pacific"]
